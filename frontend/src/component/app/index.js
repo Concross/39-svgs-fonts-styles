@@ -1,6 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import createAppStore from '../../lib/store';
 import PlayersContainer from '../players-container';
 import Landing from '../landing';
@@ -15,13 +17,20 @@ export default class App extends React.Component {
           <BrowserRouter>
             <div>
               <h1>Rugby Scout!</h1>
-              <nav>
-                <ul>
-                  <li><Link to="/welcome/signup">Sign up!</Link></li>
-                  <li><Link to="/welcome/login">Login!</Link></li>
-                  <li><Link to="/players">Dashboard</Link></li>
-                </ul>
-              </nav>
+              <Navbar>
+                <Nav>
+                  <LinkContainer to="/welcome/signup">
+                    <NavItem>Signup</NavItem>
+                  </LinkContainer>
+                  <LinkContainer to="/welcome/login">
+                    <NavItem>Login</NavItem>
+                  </LinkContainer>
+                  <LinkContainer to="/players">
+                    <NavItem>Dashboard</NavItem>
+                  </LinkContainer>
+                </Nav>
+              </Navbar>
+
               <main>
                 <Route exact path="/welcome/:auth" component={Landing} />
                 <Route exact path="/players" component={PlayersContainer} />

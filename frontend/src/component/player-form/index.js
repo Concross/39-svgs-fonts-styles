@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserPlus, faUserEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default class PlayerForm extends React.Component {
   constructor(props) {
@@ -43,7 +45,7 @@ export default class PlayerForm extends React.Component {
               Last Name:
               <input type="text" name="lastName" value={this.state.lastName} onChange={this.handleChange} autoComplete="off" />
             </label>
-            <button type="submit" >{this.props.buttonText}</button>
+            <button type="submit" ><FontAwesomeIcon icon={this.props.player ? faUserEdit : faUserPlus} /></button>
           </fieldset>
         </form>
       </div>

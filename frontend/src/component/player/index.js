@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserMinus } from '@fortawesome/free-solid-svg-icons';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -15,7 +17,7 @@ export default class Player extends React.Component {
     const profile = this.props.player;
     return (
       <div className="player">
-        <button id="btn-delete" onClick={this.handleClick}>X</button>
+        <button id="btn-delete" onClick={this.handleClick}><FontAwesomeIcon icon={faUserMinus} /></button>
         <h2>{`${profile.firstName} ${profile.lastName}`}</h2>
         {this.props.children}
       </div>

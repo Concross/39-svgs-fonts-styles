@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormGroup, FormControl } from 'react-bootstrap';
 
 export default class AuthForm extends React.Component {
   constructor(props) {
@@ -12,6 +13,14 @@ export default class AuthForm extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  getValidationState() {
+    const length = this.state.password.length;
+    if (length > 10) return 'success';
+    else if (length > 5) return 'warning';
+    else if (length > 0) return 'error';
+    return null;
   }
 
   handleChange(e) {
@@ -32,7 +41,7 @@ export default class AuthForm extends React.Component {
     return (
       <form className="auth-form" onSubmit={this.handleSubmit}>
         {this.props.auth === 'signup' ?
-          <input
+          <FormControl
             type="text"
             name="email"
             placeholder="email"
@@ -40,7 +49,7 @@ export default class AuthForm extends React.Component {
             onChange={this.handleChange}
           /> : null}
 
-        <input
+        <FormControl
           type="text"
           name="username"
           placeholder="username"
@@ -48,13 +57,19 @@ export default class AuthForm extends React.Component {
           onChange={this.handleChange}
         />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
+        <FormGroup
+          controlId="password"
+          validationState={this.props.auth === 'signup' ? this.getValidationState() : ''}
+        >
+          <FormControl
+            type="password"
+            name="password"
+            placeholder="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+          <FormControl.Feedback />
+        </FormGroup>
 
         <button type="submit">{this.props.auth}</button>
       </form>
